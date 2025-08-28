@@ -1,0 +1,275 @@
+@font-face {
+  font-family: 'MyCustomFont'; /* You can name your font anything you like */
+  src: url('font.woff2') format('woff2');
+  font-weight: normal; /* Adjust based on the font file */
+  font-style: normal; /* Adjust based on the font file */
+}
+* {
+  font-family: 'MyCustomFont', sans-serif;
+}
+
+/* container layout */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* keep your two-column layout */
+  gap: 32px;
+  overflow: hidden;      /* prevents translated children from visually overflowing */
+  padding: 8px 0;        /* optional spacing */
+}
+
+/* card basics — adjust to match your design */
+.card,
+.card-dark,
+.card-dark-2,
+.card-2 {
+  position: relative;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+  background: #fff;      /* default card background (override in .card-dark) */
+  transition: box-shadow .2s ease;
+  will-change: transform, opacity;
+}
+
+/* keep your dark card styles with good specificity so GSAP doesn't hide them */
+.card-dark {
+  background: #0f1720;   /* example dark bg */
+  color: #fff;
+}
+.card-dark-2 { /* alternate dark variant if you use it */
+  background: #111827;
+  color: #fff;
+}
+
+/* ensure images don't overflow */
+.imgwrap img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+
+
+
+:root{
+  --accent: #B9FE5C;
+  --muted: #6b6b6b;
+  --black: #0b0b0b;
+  --maxw: 1200px;
+  --gap: 32px;
+  --card-radius: 16px;
+}
+
+/* Base */
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background:#f6f7f8;
+  color:var(--black);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+}
+
+/* topbar */
+.topbar{
+  background:#ffffff;
+  border-bottom:1px solid #ececec;
+  font-size:13px;
+  color:var(--muted);
+}
+.topbar .inner{
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:8px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.topbar-cta{font-weight:600;color:var(--black)}
+
+/* header - NOT sticky */
+header{
+  background:transparent;
+}
+.nav-inner{
+  max-width:var(--maxw);
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:20px 24px;
+  gap:20px;
+}
+.brand{display:flex;align-items:center;gap:14px;}
+.brand-logo{height:38px;display:block}
+.brand-title{font-size:18px;margin:0}
+.main-nav{display:flex;gap:22px;align-items:center}
+.main-nav a{color:var(--muted);text-decoration:none;font-size:15px}
+.btn-quote{
+  border-radius:12px;padding:9px 16px;border:1px solid #e8e8e8;background:#fff;font-size:14px;
+}
+
+/* main container */
+.container{
+  max-width:var(--maxw);
+  margin:36px auto;
+  padding:0 24px 80px 24px;
+}
+
+/* hero */
+.hero{
+  display:grid;
+  grid-template-columns: 1fr 540px;
+  gap:var(--gap);
+  align-items:center;
+}
+.hero-left h2{
+  font-size:44px;
+  line-height:1.02;
+  margin:0 0 16px 0;
+  letter-spacing:-0.3px;
+}
+.hero-sub{color:var(--muted);margin:0 0 22px 0;font-size:16px;max-width:720px}
+.btn-primary{
+  background:var(--black);
+  color:#fff;
+  border-radius:12px;
+  padding:12px 18px;
+  border:0;
+  cursor:pointer;
+  font-size:15px;
+}
+.hero-right{display:flex;align-items:center;justify-content:center}
+.hero-illustration{width:100%;max-width:520px;height:auto;display:block}
+
+/* partners full-width bar with centered inner container */
+/* partners-bar spans full viewport, partners-inner is centered and constrained */
+.partners-bar{
+  width:100%;
+  background:#ffffff;
+  border-top:1px solid #eee;
+  border-bottom:1px solid #eee;
+  box-shadow: 0 6px 18px rgba(12,12,12,0.03);
+}
+
+/* center the logos area so it lines up with the site content (equal left/right margins) */
+.partners-inner{
+  max-width:var(--maxw); /* constrains logos to center with equal outer whitespace */
+  margin:0 auto;
+  padding:18px 24px; /* inner padding; adjust if you want more breathing room */
+}
+
+/* flexible partner items so logos are evenly spaced inside the constrained inner container */
+.partners{
+  display:flex;
+  align-items:center;
+  justify-content:space-between; /* keeps even spacing between items */
+  gap:18px;
+}
+.partner-item{
+  flex:1 1 0; /* each logo gets flexible space */
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-width:110px;   /* prevents items from shrinking too far on medium screens */
+  max-width:200px;   /* prevents a single logo from growing too large */
+  padding:0 8px;
+}
+.partner-item img{
+  width:100%;
+  max-width:160px; /* upper visual cap for large logos */
+  max-height:40px; /* keeps vertical size consistent */
+  height:auto;
+  object-fit:contain;
+  display:block;
+  opacity:0.95;
+}
+
+/* services/cards */
+.services{
+  margin-top:46px;
+}
+.services-head{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  margin-bottom:20px;
+}
+.pill{background:var(--accent);padding:8px 12px;border-radius:10px;font-weight:800;font-size:13px}
+.services-desc{color:var(--muted);font-size:15px;max-width:860px}
+
+.cards{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap:22px;
+  margin-top:6px;
+}
+.card{
+  border-radius:var(--card-radius);
+  padding:28px;
+  display:flex;
+  gap:22px;
+  align-items:center;
+  min-height:150px;
+  border:1px solid #eef0f2;
+  background:#fff;
+  box-shadow: 0 12px 30px rgba(14,14,14,0.06);
+  transition: transform .22s cubic-bezier(.2,.9,.2,1), box-shadow .22s;
+}
+.card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(14,14,14,0.09);
+}
+.card.dark{background:#0b0b0b;color:#fff;border:none}
+.imgwrap{width:96px;height:96px;border-radius:14px;display:flex;align-items:center;justify-content:center;overflow:hidden;background:transparent;flex-shrink:0}
+.imgwrap img{width:84px;height:84px;object-fit:contain}
+.card h4{margin:0;font-size:18px}
+.card p{margin:0;color:var(--muted);font-size:14px;max-width:520px}
+.card.dark p{color:rgba(255,255,255,0.88)}
+.learn{margin-left:auto;color:var(--muted);font-size:14px}
+
+/* CTA strip */
+.cta-strip{
+  margin-top:40px;
+  background:#f6f7f8;
+  border-radius:16px;padding:22px;
+  display:flex;gap:26px;align-items:center;
+  box-shadow: 0 10px 26px rgba(14,14,14,0.03);
+}
+.cta-left h3{margin:0 0 8px 0;font-size:20px}
+.cta-left p{margin:0;color:var(--muted)}
+.cta-black{background:var(--black);color:#fff;padding:10px 16px;border-radius:12px;border:0;margin-top:12px}
+.stars-illustration{width:140px;height:auto;display:block}
+
+/* case studies */
+.case-section{margin-top:28px}
+.case-header{display:flex;align-items:center;gap:16px;justify-content:space-between}
+.case-label{display:inline-block;background:var(--accent);padding:6px 10px;border-radius:8px;font-weight:700}
+.case-sub{color:var(--muted);margin-top:8px}
+.case-row{margin-top:18px;display:flex;gap:20px}
+.case{flex:1;background:#0b0b0b;color:#fff;padding:22px;border-radius:12px;min-height:140px;box-shadow: 0 8px 22px rgba(12,12,12,0.06)}
+.case h5{margin:0 0 8px 0;font-size:16px}
+.case p{margin:0;color:rgba(255,255,255,0.85);font-size:14px}
+
+/* footer */
+.foot-note{margin-top:28px;color:var(--muted);font-size:13px}
+
+/* responsive */
+@media (max-width:1200px){
+  .partners-inner{padding:18px 28px}
+  .partner-item{min-width:90px; max-width:160px}
+  .partners img{height:28px}
+  .hero{grid-template-columns:1fr 420px}
+}
+@media (max-width:980px){
+  .hero{grid-template-columns:1fr; text-align:center}
+  .hero-right{order:-1}
+  .cards{grid-template-columns:1fr}
+  .case-row{flex-direction:column}
+  .partners-inner{padding:14px 18px;flex-direction:column;gap:12px}
+  .partners{flex-wrap:wrap;justify-content:center;gap:18px}
+  .partner-item{max-width:220px; min-width:90px}
+  .partner-item img{max-width:100%; max-height:48px}
+}

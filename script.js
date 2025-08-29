@@ -1,3 +1,6 @@
+
+gsap.registerPlugin(ScrollTrigger);
+
 const tl = gsap.timeline({})
 function front() {
     tl.from(".brand , .main-nav > *",{
@@ -7,7 +10,7 @@ function front() {
         duration:0.4,
         stagger:0.2,
         ease: "power2.out",
-        scrub:2
+        // scrub:2
     })
     tl.from(".hero-left > *",{
         x:-41,
@@ -16,7 +19,7 @@ function front() {
         duration:0.4,
         stagger:0.2,
         ease: "power2.out",
-        scrub:2
+        // scrub:2
     })
     tl.from(".hero-right ",{
         x:41,
@@ -25,16 +28,16 @@ function front() {
         duration:0.4,
         // stagger:0.2,
         ease: "power2.out",
-        scrub:2
+        // scrub:2
     })
 
 }
-// front()
+front()
 
 const tl2 = gsap.timeline({
     scrollTrigger:{
         trigger:".partners",
-        scroller:"body",
+        // scroller:"body",
         // markers:true,
         start:"top 80%",
         end:"top 50%",
@@ -48,7 +51,7 @@ tl2.from(".partners > * ",{
         duration:0.6,
         stagger:0.15,
         ease: "power2.out",
-        scrub:2
+        // scrub:2
 })
 tl2.from(".services-head > * ",{
         y:41,
@@ -57,15 +60,62 @@ tl2.from(".services-head > * ",{
         duration:0.5,
         stagger:0.25,
         ease: "power2.out",
-        scrub:2
+        // scrub:2
 })
 
-gsap.registerPlugin(ScrollTrigger);
+
+
+const casestudy = document.querySelectorAll(".case-section > *");
+// set initial hidden/offscreen
+gsap.set(casestudy, { y: 80, autoAlpha: 0 });
+
+// animate into view when .cta-strip triggers
+gsap.to(casestudy, {
+  y: 0,
+  autoAlpha: 1,
+  duration: 1,
+  stagger: 0.25,
+  opacity:1,
+  ease: "power2.out",
+  scrollTrigger: {
+    trigger: ".case-section",
+    start: "top 85%",
+    end: "top 40%",
+    toggleActions: "play none none reverse",
+    scrub:1,
+    // scrub:1
+    // markers: true
+  }
+});
+
+
+/* CTA STRIP — ensure it is hidden initially and animate when it enters view */
+const ctaChildren = document.querySelectorAll(".cta-strip > *");
+// set initial hidden/offscreen
+gsap.set(ctaChildren, { x: -40, autoAlpha: 0 });
+
+// animate into view when .cta-strip triggers
+gsap.to(ctaChildren, {
+  x: 0,
+  autoAlpha: 1,
+  duration: 1,
+  stagger: 0.25,
+  ease: "power2.out",
+  scrollTrigger: {
+    trigger: ".cta-strip",
+    start: "top 85%",
+    toggleActions: "play none none reverse",
+    scrub:2
+    // markers: true
+  }
+});
+
+
 
 const cardEls = document.querySelectorAll(".cards > *");
 
 cardEls.forEach((el, i) => {
-  const fromX = (i % 2 === 0) ? -160 : 160;   // left for even, right for odd
+  const fromX = (i % 2 === 0) ? -200 : 200;   // left for even, right for odd
 
   // <-- make them hidden/offscreen right away -->
   gsap.set(el, { x: fromX, autoAlpha: 0 });
@@ -74,20 +124,23 @@ cardEls.forEach((el, i) => {
   gsap.to(el, {
     x: 0,
     autoAlpha: 1,
-    duration: 2,
-    stagger:0.5,
-    scrub:2,
+    duration: 4,
+    stagger:1,
+    
     ease: "power2.out",
     overwrite: true,
     scrollTrigger: {
       trigger: el,
       start: "top 85%",
-      end: "top 60%",
-      toggleActions: "play none none reverse",
+      end: "top 40%",
+      scrub:2,
+      // toggleActions: "play none none reverse",
       // markers: true // enable for debugging
     }
   });
 });
+
+
 
 
 
